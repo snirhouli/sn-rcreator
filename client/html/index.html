@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QB Robbery Creator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="main-container">
+        <div class="gradient-bg">
+            <h1 class="header-title">QB Robbery Creator</h1>
+            <button id="close-btn" class="close-btn">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        
+        <div class="content-wrapper">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="section-container">
+                    <h2 class="section-title">Robbery Types</h2>
+                    <div class="btn-group">
+                        <button class="robbery-type-btn active" data-type="store">
+                            <i class="fas fa-store"></i> Store
+                        </button>
+                        <button class="robbery-type-btn" data-type="bank">
+                            <i class="fas fa-university"></i> Bank
+                        </button>
+                        <button class="robbery-type-btn" data-type="jewelry">
+                            <i class="fas fa-gem"></i> Jewelry
+                        </button>
+                        <button class="robbery-type-btn" data-type="house">
+                            <i class="fas fa-home"></i> House
+                        </button>
+                        <button class="robbery-type-btn" data-type="custom">
+                            <i class="fas fa-cog"></i> Custom
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="section-title">Saved Robberies</h2>
+                    <div id="saved-robberies" class="saved-list">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="save-robbery-btn" class="action-btn save-btn">
+                        <i class="fas fa-save"></i> Save Robbery
+                    </button>
+                    <button id="delete-robbery-btn" class="action-btn delete-btn">
+                        <i class="fas fa-trash"></i> Delete Selected
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="section-container">
+                    <h2 class="section-title">Robbery Details</h2>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label class="input-label">Robbery Name</label>
+                            <input type="text" id="robbery-name" class="input-field" placeholder="24/7 Convenience Store">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Cooldown (minutes)</label>
+                            <input type="number" id="robbery-cooldown" class="input-field" value="30" min="1">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Reward Items (comma separated)</label>
+                            <input type="text" id="robbery-rewards" class="input-field" placeholder="lockpick,security_card,markedbills">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Required Items (comma separated)</label>
+                            <input type="text" id="robbery-required" class="input-field" placeholder="lockpick,thermite">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Police Alert</label>
+                            <select id="robbery-alert" class="input-field">
+                                <option value="none">No Alert</option>
+                                <option value="local">Local PD (QS-Dispatch)</option>
+                                <option value="state">Statewide (QS-Dispatch)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="section-title">Position Details</h2>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label class="input-label">X Coordinate</label>
+                            <input type="text" id="pos-x" class="input-field" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Y Coordinate</label>
+                            <input type="text" id="pos-y" class="input-field" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Z Coordinate</label>
+                            <input type="text" id="pos-z" class="input-field" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Heading</label>
+                            <input type="text" id="pos-heading" class="input-field" readonly>
+                        </div>
+                        <div class="input-group span-2">
+                            <button id="grab-position-btn" class="action-btn">
+                                <i class="fas fa-crosshairs"></i> Grab Current Position
+                            </button>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Radius</label>
+                            <input type="number" id="robbery-radius" class="input-field" value="2.0" step="0.1" min="0.5">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="section-title">Minigame Configuration</h2>
+                    <div class="minigame-grid">
+                        <div class="minigame-card active" data-minigame="none">
+                            <div class="minigame-icon">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <h3>None</h3>
+                            <p>No minigame required</p>
+                        </div>
+                        <div class="minigame-card" data-minigame="lockpick">
+                            <div class="minigame-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <h3>Lockpick</h3>
+                            <p>Standard lockpick minigame</p>
+                        </div>
+                        <div class="minigame-card" data-minigame="hacking">
+                            <div class="minigame-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Hacking</h3>
+                            <p>Memory puzzle minigame</p>
+                        </div>
+                        <div class="minigame-card" data-minigame="thermite">
+                            <div class="minigame-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h3>Thermite</h3>
+                            <p>Pattern matching game</p>
+                        </div>
+                        <div class="minigame-card" data-minigame="drilling">
+                            <div class="minigame-icon">
+                                <i class="fas fa-screwdriver"></i>
+                            </div>
+                            <h3>Drilling</h3>
+                            <p>Precision drilling minigame</p>
+                        </div>
+                    </div>
+                    
+                    <div id="minigame-settings" class="minigame-settings">
+                        <h3 id="minigame-selected">Selected: None</h3>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label class="input-label">Difficulty</label>
+                                <select id="minigame-difficulty" class="input-field">
+                                    <option value="easy">Easy</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Attempts</label>
+                                <input type="number" id="minigame-attempts" class="input-field" value="3" min="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
