@@ -27,7 +27,6 @@ Config.Database = {
     deleteAfterDays = false -- false or number of days to keep deleted robberies in DB
 }
 
--- Add to Config in config.lua
 Config.Dispatch = {
     useQS = true, -- Set to false if you don't want to use QS-Dispatch
     defaultAlert = '10-90', -- Default alert code for robberies
